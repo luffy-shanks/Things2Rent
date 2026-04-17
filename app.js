@@ -77,10 +77,10 @@ function showToast(message, duration = 4000) {
     const toast = document.getElementById('toast');
     const msg = document.getElementById('toast-message');
     if (!toast || !msg) return;
-    
+
     msg.textContent = message;
     toast.classList.add('show');
-    
+
     setTimeout(() => {
         toast.classList.remove('show');
     }, duration);
@@ -98,12 +98,12 @@ function showOTP() {
     const overlay = document.getElementById('otp-overlay');
     overlay.style.display = 'flex';
     document.querySelector('.otp-inputs input').focus();
-    
+
     // Simulate OTP for demo
     const mockOtp = Math.floor(1000 + Math.random() * 9000).toString();
     const emailTo = emailInput ? emailInput.value : 'your email';
     showToast(`OTP sent to ${emailTo}: ${mockOtp}`, 5000);
-    
+
     // Autofill mechanism logic (Wait for 1s to feel realistic then autofill)
     setTimeout(() => {
         const otpInputs = document.querySelectorAll('.otp-inputs input');
@@ -144,11 +144,11 @@ function triggerSearch() {
         showToast('Quantity must be at least 1.', 3000);
         return;
     }
-    
+
     document.getElementById('active-request-banner').style.display = 'flex';
     nav('searching');
     showToast('Searching for nearby suppliers...', 2000);
-    
+
     // Hidden trigger to allow toggling demo mode easily
     const radar = document.querySelector('.radar-container');
     if (radar && !radar.dataset.listenerAdded) {
@@ -172,7 +172,7 @@ function triggerSearch() {
 function acceptRequest(btn) {
     const card = btn.closest('.req-card');
     const allCards = document.querySelectorAll('#incoming-req .req-card');
-    
+
     allCards.forEach(c => {
         if (c !== card) {
             c.style.opacity = '0.5';
@@ -182,10 +182,10 @@ function acceptRequest(btn) {
 
     btn.textContent = 'Accepted';
     btn.style.background = 'var(--success)';
-    
+
     showToast('Request Accepted! Navigating...', 2000);
     setTimeout(() => {
-        nav('live-track');
+        nav('live-track-supplier');
     }, 1500);
 }
 
@@ -193,4 +193,24 @@ function cancelRequest() {
     document.getElementById('active-request-banner').style.display = 'none';
     showToast('Request cancelled.', 3000);
     nav('home');
+}
+
+// Global Wallet State
+let walletBalance = 450;
+
+function processPayment() {
+    // Only handling wallet flow for the demo
+    if (walletBalance >= 25) {
+        walletBalance -= 25;
+        const balDisp = document.getElementById('wallet-balance-display');
+        if (balDisp) balDisp.textContent = walletBalance;
+
+        showToast('Payment of ₹25 successful via Wallet.', 3000);
+
+        setTimeout(() => {
+            nav('active-rental-renter');
+        }, 800);
+    } else {
+        showToast('Insufficient wallet balance!', 3000);
+    }
 }
