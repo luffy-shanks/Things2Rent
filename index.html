@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Things2Rent</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Ionicons for standard icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div id="app-container">
         <!-- 1. Splash Screen -->
@@ -109,21 +112,26 @@
                     </div>
                 </div>
             </header>
-            
+
             <!-- Dropdown Menu -->
             <div id="dropdown-menu" class="dropdown-menu">
-                <div class="dropdown-item" onclick="nav('incoming-req')"><ion-icon name="document-text-outline"></ion-icon> Requests</div>
-                <div class="dropdown-item" onclick="nav('live-track')"><ion-icon name="time-outline"></ion-icon> Status</div>
-                <div class="dropdown-item" onclick="nav('history')"><ion-icon name="wallet-outline"></ion-icon> Transactions</div>
-                <div class="dropdown-item" onclick="nav('profile')"><ion-icon name="person-outline"></ion-icon> Profile</div>
+                <div class="dropdown-item" onclick="nav('incoming-req')"><ion-icon
+                        name="document-text-outline"></ion-icon> Requests</div>
+                <div class="dropdown-item" onclick="nav('live-track')"><ion-icon name="time-outline"></ion-icon> Status
+                </div>
+                <div class="dropdown-item" onclick="nav('history')"><ion-icon name="wallet-outline"></ion-icon>
+                    Transactions</div>
+                <div class="dropdown-item" onclick="nav('profile')"><ion-icon name="person-outline"></ion-icon> Profile
+                </div>
             </div>
-            
+
             <div class="search-bar">
                 <ion-icon name="search-outline"></ion-icon>
                 <input type="text" placeholder="Find item...">
             </div>
 
-            <div id="active-request-banner" class="active-request-banner" style="display: none;" onclick="nav('live-track')">
+            <div id="active-request-banner" class="active-request-banner" style="display: none;"
+                onclick="nav('live-track')">
                 <div class="banner-content">
                     <ion-icon name="pulse"></ion-icon>
                     <div>
@@ -170,7 +178,7 @@
                         </div>
                         <span class="item-price">₹20<small>/hr</small></span>
                     </div>
-                    
+
                     <div class="item-card">
                         <div class="item-left">
                             <ion-icon name="calculator-outline" class="item-icon"></ion-icon>
@@ -207,7 +215,11 @@
                 <form class="form-layout">
                     <div class="field">
                         <label>Select Item</label>
-                        <select><option>Calculator</option><option>Drafter</option><option>Laptop Charger</option></select>
+                        <select>
+                            <option>Calculator</option>
+                            <option>Drafter</option>
+                            <option>Laptop Charger</option>
+                        </select>
                     </div>
                     <div class="field">
                         <label>Quantity</label>
@@ -220,7 +232,11 @@
                     </div>
                     <div class="field">
                         <label>Pickup Location</label>
-                        <select><option>Library</option><option>Canteen</option><option>Hostel Block A</option></select>
+                        <select>
+                            <option>Library</option>
+                            <option>Canteen</option>
+                            <option>Hostel Block A</option>
+                        </select>
                     </div>
                     <div class="field">
                         <label>Expected Price Range (₹)</label>
@@ -288,10 +304,12 @@
                         <span class="price">₹25</span>
                     </div>
                     <div class="confidence-indicators">
-                        <span class="badge neutral"><ion-icon name="checkmark-circle-outline"></ion-icon> Delivered 12 times</span>
+                        <span class="badge neutral"><ion-icon name="checkmark-circle-outline"></ion-icon> Delivered 12
+                            times</span>
                         <span class="badge neutral"><ion-icon name="time-outline"></ion-icon> 95% Fast Reply</span>
                     </div>
-                    <button class="btn primary" style="margin-top: 12px;" onclick="nav('live-track')">Select Rahul</button>
+                    <button class="btn primary" style="margin-top: 12px;" onclick="nav('live-track')">Select
+                        Rahul</button>
                 </div>
                 <div class="supplier-card">
                     <div class="sup-info">
@@ -306,10 +324,12 @@
                         <span class="price">₹20</span>
                     </div>
                     <div class="confidence-indicators">
-                        <span class="badge neutral"><ion-icon name="checkmark-circle-outline"></ion-icon> Delivered 8 times</span>
+                        <span class="badge neutral"><ion-icon name="checkmark-circle-outline"></ion-icon> Delivered 8
+                            times</span>
                         <span class="badge neutral"><ion-icon name="time-outline"></ion-icon> 80% Fast Reply</span>
                     </div>
-                    <button class="btn primary" style="margin-top: 12px;" onclick="nav('live-track')">Select Priya</button>
+                    <button class="btn primary" style="margin-top: 12px;" onclick="nav('live-track')">Select
+                        Priya</button>
                 </div>
             </div>
         </section>
@@ -360,8 +380,164 @@
                 </div>
                 <div class="otp-display">OTP: 5824</div>
             </div>
-            <div class="bottom-action">
-                <button class="btn primary lg w-full" onclick="nav('rating')">Item Received</button>
+            <div class="bottom-action" style="padding: 24px;">
+                <button class="btn primary lg w-full" onclick="document.getElementById('active-request-banner').style.display='none'; nav('payment');">Item Received</button>
+            </div>
+        </section>
+
+        <!-- Payment Screen -->
+        <section id="payment" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('pickup-confirm')"></ion-icon>
+                <h2>Confirm Payment</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll center">
+                <ion-icon name="wallet-outline" style="font-size: 64px; color: var(--primary); margin-bottom: 16px;"></ion-icon>
+                <p class="subtext">Secure Payment for</p>
+                <h3 style="margin-bottom: 24px;">Calculator <span style="font-weight: 400; color: var(--text-muted);">from Rahul S.</span></h3>
+                
+                <div class="item-card bg-alt mt-top" style="width: 100%; max-width: 400px; text-align: left; margin-bottom: 24px;">
+                    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: var(--text-main);">Amount to Pay</span>
+                        <span style="font-weight: 700; color: var(--primary); font-size: 20px;">₹25</span>
+                    </div>
+                </div>
+
+                <p class="subtext" style="text-align: left; width: 100%; max-width: 400px; margin-bottom: 12px; padding-left: 4px;">Select Method</p>
+                <div class="pay-method active" style="width: 100%; max-width: 400px; padding: 16px; border: 2px solid var(--primary); border-radius: var(--border-radius-sm); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; background: rgba(37, 99, 235, 0.05); cursor: pointer;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <ion-icon name="wallet" style="color: var(--primary); font-size: 24px;"></ion-icon>
+                        <span style="font-weight: 600; color: var(--text-main);">Things2Rent Wallet</span>
+                    </div>
+                    <ion-icon name="checkmark-circle" style="color: var(--primary); font-size: 24px;"></ion-icon>
+                </div>
+                
+                <div class="pay-method inactive" style="width: 100%; max-width: 400px; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); cursor: pointer; opacity: 0.7;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <ion-icon name="phone-portrait-outline" style="color: var(--text-muted); font-size: 24px;"></ion-icon>
+                        <span style="font-weight: 500; color: var(--text-main);">UPI (GPay / PhonePe)</span>
+                    </div>
+                    <ion-icon name="ellipse-outline" style="color: var(--border-color); font-size: 24px;"></ion-icon>
+                </div>
+
+                <div style="margin-top: auto; padding: 24px; width: 100%; max-width: 400px;">
+                    <button class="btn primary lg w-full" onclick="processPayment()">Pay ₹25</button>
+                    <button class="btn secondary lg w-full mt-top" onclick="nav('pickup-confirm')">Cancel</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Rental (Renter) -->
+        <section id="active-rental-renter" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Active Rental</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll center">
+                <ion-icon name="time-outline"
+                    style="font-size: 64px; color: var(--primary); margin-bottom: 16px;"></ion-icon>
+                <h2>01h 24m</h2>
+                <p class="subtext">You are currently renting:</p>
+                <div class="item-card bg-alt mt-top" style="width: 100%; max-width: 400px; text-align: left;">
+                    <div class="item-left">
+                        <ion-icon name="calculator-outline" class="item-icon"></ion-icon>
+                        <div class="item-details">
+                            <span class="item-name">Scientific Calc</span>
+                            <span class="item-supplier">Rented from Rahul S.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card mt-top" style="width: 100%; max-width: 400px; padding: 16px; background: var(--bg-surface); border-radius: var(--border-radius-sm); box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; text-align: left;">
+                    <div>
+                        <span style="display: block; font-size: 13px; color: var(--text-muted);">Supplier Contact</span>
+                        <span style="font-weight: 600; color: var(--text-main);">+91 98765 43210</span>
+                    </div>
+                    <button class="icon-btn" style="background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 12px; border-radius: 50%; border: none; cursor: pointer;"><ion-icon name="call" style="font-size: 20px;"></ion-icon></button>
+                </div>
+                <div style="margin-top: auto; padding: 24px; width: 100%; max-width: 400px;">
+                    <button class="btn urgent-btn lg w-full" onclick="nav('rating')">Return Item</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supplier: Live Tracking -->
+        <section id="live-track-supplier" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Delivery Route</h2>
+                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            </header>
+            <div class="map-placeholder">
+                <ion-icon name="map"></ion-icon>
+                <p>Map View to Renter</p>
+            </div>
+            <div class="status-panel">
+                <div class="timer urgent-text">04:59</div>
+                <h3>Deliver to Gowtham K.</h3>
+                <div class="stepper">
+                    <div class="step active">Accepted</div>
+                    <div class="step active">On Way</div>
+                    <div class="step">Handoff</div>
+                </div>
+                <button class="btn primary lg mt-bot" onclick="nav('handoff-supplier')">Reached</button>
+            </div>
+        </section>
+
+        <!-- Supplier: Handoff Verification -->
+        <section id="handoff-supplier" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('live-track-supplier')"></ion-icon>
+                <h2>Verify Handoff</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll center">
+                <p style="margin-bottom: 24px;">Enter the 4-digit code from the renter to confirm you gave them the
+                    item.</p>
+                <div class="otp-inputs" style="margin-bottom: 40px; justify-content: center;">
+                    <input type="text" maxlength="1" value="5">
+                    <input type="text" maxlength="1" value="8">
+                    <input type="text" maxlength="1" value="2">
+                    <input type="text" maxlength="1" value="4">
+                </div>
+                <!-- Hide the Renter's simulated Emergency Banner just in case doing full simulated loop on one device -->
+                <button class="btn primary lg w-full" style="max-width: 400px;"
+                    onclick="document.getElementById('active-request-banner').style.display='none'; nav('active-rental-supplier')">Item Given</button>
+            </div>
+        </section>
+
+        <!-- Supplier: Active Rental Out -->
+        <section id="active-rental-supplier" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Lent Out</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll center">
+                <ion-icon name="swap-horizontal-outline"
+                    style="font-size: 64px; color: var(--success); margin-bottom: 16px;"></ion-icon>
+                <h2>Item is with Renter</h2>
+                <p class="subtext">The rental period has started.</p>
+                <div class="item-card mt-top" style="width: 100%; max-width: 400px; text-align: left;">
+                    <div class="item-left">
+                        <ion-icon name="calculator-outline" class="item-icon"></ion-icon>
+                        <div class="item-details">
+                            <span class="item-name">Scientific Calc</span>
+                            <span class="item-supplier">Lent to Gowtham K.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card mt-top" style="width: 100%; max-width: 400px; padding: 16px; background: var(--bg-surface); border-radius: var(--border-radius-sm); box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; text-align: left;">
+                    <div>
+                        <span style="display: block; font-size: 13px; color: var(--text-muted);">Renter Contact</span>
+                        <span style="font-weight: 600; color: var(--text-main);">+91 91234 56789</span>
+                    </div>
+                    <button class="icon-btn" style="background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 12px; border-radius: 50%; border: none; cursor: pointer;"><ion-icon name="call" style="font-size: 20px;"></ion-icon></button>
+                </div>
+                <div style="margin-top: auto; padding: 24px; width: 100%; max-width: 400px;">
+                    <button class="btn primary lg w-full" onclick="nav('rating')">Receive Item Back</button>
+                </div>
             </div>
         </section>
 
@@ -402,7 +578,7 @@
                     <p>Rentals</p>
                 </div>
                 <div class="stat-box highlight">
-                    <h3>₹450</h3>
+                    <h3>₹<span id="wallet-balance-display">450</span></h3>
                     <p>Wallet</p>
                 </div>
                 <div class="stat-box">
@@ -411,10 +587,14 @@
                 </div>
             </div>
             <div class="menu-list">
-                <div class="menu-item"><ion-icon name="list-circle-outline"></ion-icon> My Items <ion-icon name="chevron-forward-outline"></ion-icon></div>
-                <div class="menu-item" onclick="nav('history')"><ion-icon name="swap-horizontal-outline"></ion-icon> Request History <ion-icon name="chevron-forward-outline"></ion-icon></div>
-                <div class="menu-item"><ion-icon name="wallet-outline"></ion-icon> Transactions <ion-icon name="chevron-forward-outline"></ion-icon></div>
-                <div class="menu-item red-txt" onclick="nav('login')"><ion-icon name="log-out-outline"></ion-icon> Logout </div>
+                <div class="menu-item"><ion-icon name="list-circle-outline"></ion-icon> My Items <ion-icon
+                        name="chevron-forward-outline"></ion-icon></div>
+                <div class="menu-item" onclick="nav('history')"><ion-icon name="swap-horizontal-outline"></ion-icon>
+                    Request History <ion-icon name="chevron-forward-outline"></ion-icon></div>
+                <div class="menu-item"><ion-icon name="wallet-outline"></ion-icon> Transactions <ion-icon
+                        name="chevron-forward-outline"></ion-icon></div>
+                <div class="menu-item red-txt" onclick="nav('login')"><ion-icon name="log-out-outline"></ion-icon>
+                    Logout </div>
             </div>
         </section>
 
@@ -446,14 +626,22 @@
                         </div>
                         <div class="field w-half">
                             <label>Per</label>
-                            <select><option>Hour</option><option>Day</option></select>
+                            <select>
+                                <option>Hour</option>
+                                <option>Day</option>
+                            </select>
                         </div>
                     </div>
                     <div class="field">
                         <label>Category</label>
-                        <select><option>Stationery</option><option>Electronics</option><option>Books</option></select>
+                        <select>
+                            <option>Stationery</option>
+                            <option>Electronics</option>
+                            <option>Books</option>
+                        </select>
                     </div>
-                    <button type="button" class="btn primary lg w-full" onclick="alert('Item Added!'); nav('home');">Publish Item</button>
+                    <button type="button" class="btn primary lg w-full"
+                        onclick="alert('Item Added!'); nav('home');">Publish Item</button>
                 </form>
             </div>
         </section>
@@ -473,13 +661,18 @@
         <!-- No Response (Failure) -->
         <section id="no-response" class="screen">
             <div class="center center-content full-height">
-                <ion-icon name="sad-outline" style="font-size: 64px; margin-bottom: 20px; color: var(--text-muted);"></ion-icon>
+                <ion-icon name="sad-outline"
+                    style="font-size: 64px; margin-bottom: 20px; color: var(--text-muted);"></ion-icon>
                 <h3>No one available right now</h3>
-                <p class="subtext" style="max-width: 300px; margin: 10px auto;">We couldn't find anyone nearby who has accepted your request. What would you like to do?</p>
+                <p class="subtext" style="max-width: 300px; margin: 10px auto;">We couldn't find anyone nearby who has
+                    accepted your request. What would you like to do?</p>
                 <div style="margin-top: 30px; width: 100%; max-width: 400px; padding: 0 20px;">
-                    <button type="button" class="btn urgent-btn lg w-full" onclick="triggerSearch()">Retry Search</button>
-                    <button type="button" class="btn outline lg w-full mt-top" onclick="alert('Price updated!'); triggerSearch()">Increase Price by ₹10</button>
-                    <button type="button" class="btn secondary lg w-full mt-top" onclick="nav('home')">Cancel Request</button>
+                    <button type="button" class="btn urgent-btn lg w-full" onclick="triggerSearch()">Retry
+                        Search</button>
+                    <button type="button" class="btn outline lg w-full mt-top"
+                        onclick="alert('Price updated!'); triggerSearch()">Increase Price by ₹10</button>
+                    <button type="button" class="btn secondary lg w-full mt-top" onclick="nav('home')">Cancel
+                        Request</button>
                 </div>
             </div>
         </section>
@@ -495,12 +688,16 @@
                 <div class="req-card" style="padding: 16px;">
                     <h4 style="margin-bottom: 4px; font-size: 16px;">New Item Match!</h4>
                     <p style="color: var(--text-muted); font-size: 14px;">Someone listed a 'Mini Drafter' near you.</p>
-                    <span style="font-size: 11px; color: var(--primary); font-weight: bold; margin-top: 8px; display: block;">2 mins ago</span>
+                    <span
+                        style="font-size: 11px; color: var(--primary); font-weight: bold; margin-top: 8px; display: block;">2
+                        mins ago</span>
                 </div>
                 <div class="req-card" style="padding: 16px; opacity: 0.7;">
                     <h4 style="margin-bottom: 4px; font-size: 16px;">Rental Completed</h4>
-                    <p style="color: var(--text-muted); font-size: 14px;">Rahul S. confirmed the return of your Arduino Uno.</p>
-                    <span style="font-size: 11px; color: var(--text-muted); margin-top: 8px; display: block;">Yesterday</span>
+                    <p style="color: var(--text-muted); font-size: 14px;">Rahul S. confirmed the return of your Arduino
+                        Uno.</p>
+                    <span
+                        style="font-size: 11px; color: var(--text-muted); margin-top: 8px; display: block;">Yesterday</span>
                 </div>
             </div>
         </section>
@@ -518,8 +715,9 @@
                     <div class="choice">Completed</div>
                     <div class="choice">Cancelled</div>
                 </div>
-                
-                <div class="item-card" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+
+                <div class="item-card"
+                    style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
                     <div style="width: 100%; display: flex; justify-content: space-between;">
                         <span style="color: var(--text-main); font-weight: 600;">Calculator</span>
                         <span class="badge green">Completed</span>
@@ -527,7 +725,8 @@
                     <p style="font-size: 13px; color: var(--text-muted);">Supplier: Rahul S. • ₹25</p>
                 </div>
 
-                <div class="item-card" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="item-card"
+                    style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
                     <div style="width: 100%; display: flex; justify-content: space-between;">
                         <span style="color: var(--text-main); font-weight: 600;">Lab Coat (M)</span>
                         <span class="badge red">Cancelled</span>
@@ -547,4 +746,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
