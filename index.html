@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things2Rent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Ionicons for standard icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- 1. Splash Screen -->
+        <section id="splash" class="screen active">
+            <div class="logo-container custom-splash-anim">
+                <img src="logo.png" alt="Things2Rent Logo" class="custom-logo">
+                <!-- Logo image replaces the icon, h1 and p are stylized below -->
+            </div>
+            <div class="splash-footer">
+                <p class="splash-quote">"Get what you need, when you need it."</p>
+            </div>
+        </section>
+
+        <!-- 2. Login Screen -->
+        <section id="login" class="screen">
+            <div class="header-text">
+                <h2>Welcome Back</h2>
+                <p>Login to continue</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="email" placeholder="College Email" required>
+                </div>
+                <div class="input-group">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="button" class="btn primary" onclick="nav('home')">Login</button>
+            </form>
+            <p class="switch-auth">Don't have an account? <span onclick="nav('signup')">Sign Up</span></p>
+        </section>
+
+        <!-- 2. Signup Screen -->
+        <section id="signup" class="screen">
+            <div class="header-text">
+                <h2>Create Account</h2>
+                <p>Join the community</p>
+            </div>
+            <form id="signup-form">
+                <div class="input-group">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="email" placeholder="College Email" required>
+                </div>
+                <div class="input-group">
+                    <ion-icon name="card-outline"></ion-icon>
+                    <input type="text" placeholder="Registration No" required>
+                </div>
+                <div class="input-group">
+                    <ion-icon name="business-outline"></ion-icon>
+                    <input type="text" placeholder="Branch" required>
+                </div>
+                <div class="input-group">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="button" class="btn primary" onclick="showOTP()">Verify with OTP</button>
+            </form>
+            <p class="switch-auth">Already have an account? <span onclick="nav('login')">Login</span></p>
+
+            <div class="overlay" id="otp-overlay">
+                <div class="modal">
+                    <h3>Verify OTP</h3>
+                    <p>Enter the code sent to your email.</p>
+                    <div class="otp-inputs">
+                        <input type="text" maxlength="1">
+                        <input type="text" maxlength="1">
+                        <input type="text" maxlength="1">
+                        <input type="text" maxlength="1">
+                    </div>
+                    <button type="button" class="btn primary" onclick="confirmOTP()">Confirm</button>
+                    <button type="button" class="btn secondary" onclick="closeOTP()">Cancel</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Home Dashboard -->
+        <section id="home" class="screen with-nav">
+            <header class="app-header">
+                <div>
+                    <h2>Hi Gowtham 👋</h2>
+                    <p>What do you need today?</p>
+                </div>
+                <div class="header-actions">
+                    <div class="nav-bell" onclick="nav('notifications')">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <span class="bell-badge">2</span>
+                    </div>
+                    <div class="avatar" onclick="nav('profile')">G</div>
+                    <div class="menu-btn" onclick="toggleMenu()">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dropdown Menu -->
+            <div id="dropdown-menu" class="dropdown-menu">
+                <div class="dropdown-item" onclick="nav('incoming-req')"><ion-icon name="document-text-outline"></ion-icon> Requests</div>
+                <div class="dropdown-item" onclick="nav('live-track')"><ion-icon name="time-outline"></ion-icon> Status</div>
+                <div class="dropdown-item" onclick="nav('history')"><ion-icon name="wallet-outline"></ion-icon> Transactions</div>
+                <div class="dropdown-item" onclick="nav('profile')"><ion-icon name="person-outline"></ion-icon> Profile</div>
+            </div>
+            
+            <div class="search-bar">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" placeholder="Find item...">
+            </div>
+
+            <div id="active-request-banner" class="active-request-banner" style="display: none;" onclick="nav('live-track')">
+                <div class="banner-content">
+                    <ion-icon name="pulse"></ion-icon>
+                    <div>
+                        <h4>Active Emergency: Calculator</h4>
+                        <p>Supplier is on the way...</p>
+                    </div>
+                </div>
+                <ion-icon name="chevron-forward"></ion-icon>
+            </div>
+
+            <div class="grid-dashboard">
+                <div class="grid-card urgent span-2" onclick="nav('emergency')">
+                    <ion-icon name="flash-outline"></ion-icon>
+                    <span class="urgent-text-head">I NEED ITEM NOW</span>
+                </div>
+                <div class="grid-card highlight-card" onclick="alert('Browse logic not pictured')">
+                    <ion-icon name="cube-outline"></ion-icon>
+                    <span>Browse Items</span>
+                </div>
+                <div class="grid-card status-blue grid-half" onclick="nav('incoming-req')">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <span>Incoming Requests</span>
+                </div>
+                <div class="grid-card status-green grid-half" onclick="nav('live-track')">
+                    <ion-icon name="navigate-circle-outline"></ion-icon>
+                    <span>Live Tracking</span>
+                </div>
+                <div class="grid-card status-blue grid-half" onclick="nav('add-item')">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <span>Add Item</span>
+                </div>
+            </div>
+
+            <div class="recent-adds">
+                <h3>Recently Added</h3>
+                <div class="recent-list">
+                    <div class="item-card bg-alt">
+                        <div class="item-left">
+                            <ion-icon name="hardware-chip-outline" class="item-icon"></ion-icon>
+                            <div class="item-details">
+                                <span class="item-name">Mini Drafter</span>
+                                <span class="item-supplier">Renting nearby • 20 mins ago</span>
+                            </div>
+                        </div>
+                        <span class="item-price">₹20<small>/hr</small></span>
+                    </div>
+                    
+                    <div class="item-card">
+                        <div class="item-left">
+                            <ion-icon name="calculator-outline" class="item-icon"></ion-icon>
+                            <div class="item-details">
+                                <span class="item-name">Scientific Calc</span>
+                                <span class="item-supplier">Renting nearby • 1 hr ago</span>
+                            </div>
+                        </div>
+                        <span class="item-price">₹15<small>/hr</small></span>
+                    </div>
+
+                    <div class="item-card bg-alt">
+                        <div class="item-left">
+                            <ion-icon name="flash-outline" class="item-icon"></ion-icon>
+                            <div class="item-details">
+                                <span class="item-name">Arduino Uno</span>
+                                <span class="item-supplier">Available now</span>
+                            </div>
+                        </div>
+                        <span class="item-price">₹50<small>/day</small></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Emergency Request -->
+        <section id="emergency" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Emergency Request</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll">
+                <form class="form-layout">
+                    <div class="field">
+                        <label>Select Item</label>
+                        <select><option>Calculator</option><option>Drafter</option><option>Laptop Charger</option></select>
+                    </div>
+                    <div class="field">
+                        <label>Quantity</label>
+                        <input type="number" min="1" value="1">
+                    </div>
+                    <div class="field-row">
+                        <div class="choice active">Now</div>
+                        <div class="choice">30 Min</div>
+                        <div class="choice">1 Hr</div>
+                    </div>
+                    <div class="field">
+                        <label>Pickup Location</label>
+                        <select><option>Library</option><option>Canteen</option><option>Hostel Block A</option></select>
+                    </div>
+                    <div class="field">
+                        <label>Expected Price Range (₹)</label>
+                        <input type="text" placeholder="e.g. 20-50">
+                    </div>
+                    <button type="button" class="btn lg urgent-btn" onclick="triggerSearch()">Send Request</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 5. Incoming Requests (Supplier) -->
+        <section id="incoming-req" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Incoming Requests</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll">
+                <div class="req-card">
+                    <div class="req-head">
+                        <h4>Scientific Calculator</h4>
+                        <span class="badge orange">Urgent (Now)</span>
+                    </div>
+                    <p class="subtext"><ion-icon name="location-outline"></ion-icon> 200m away • Canteen</p>
+                    <div class="price-val">Offered: ₹30</div>
+                    <div class="btn-group">
+                        <button class="btn primary" onclick="acceptRequest(this)">Accept</button>
+                        <button class="btn outline" onclick="alert('Ignored')">Ignore</button>
+                    </div>
+                </div>
+                <div class="req-card">
+                    <div class="req-head">
+                        <h4>Lab Coat (Size M)</h4>
+                        <span class="badge neutral">In 30 mins</span>
+                    </div>
+                    <p class="subtext"><ion-icon name="location-outline"></ion-icon> 500m away • Block C</p>
+                    <div class="price-val">Offered: ₹10</div>
+                    <div class="btn-group">
+                        <button class="btn primary" onclick="acceptRequest(this)">Accept</button>
+                        <button class="btn outline">Ignore</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Choose Supplier -->
+        <section id="choose-supplier" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('emergency')"></ion-icon>
+                <h2>Choose Supplier</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll">
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">2 suppliers accepted your request</p>
+                <div class="supplier-card">
+                    <div class="sup-info">
+                        <div class="avatar sm">R</div>
+                        <div>
+                            <h4>Rahul S.</h4>
+                            <span class="stars">4.8 ⭐ (12 items)</span>
+                        </div>
+                    </div>
+                    <div class="sup-stats">
+                        <span><ion-icon name="location-outline"></ion-icon> 150m</span>
+                        <span class="price">₹25</span>
+                    </div>
+                    <div class="confidence-indicators">
+                        <span class="badge neutral"><ion-icon name="checkmark-circle-outline"></ion-icon> Delivered 12 times</span>
+                        <span class="badge neutral"><ion-icon name="time-outline"></ion-icon> 95% Fast Reply</span>
+                    </div>
+                    <button class="btn primary" style="margin-top: 12px;" onclick="nav('live-track')">Select Rahul</button>
+                </div>
+                <div class="supplier-card">
+                    <div class="sup-info">
+                        <div class="avatar sm blue">P</div>
+                        <div>
+                            <h4>Priya M.</h4>
+                            <span class="stars">4.5 ⭐ (8 items)</span>
+                        </div>
+                    </div>
+                    <div class="sup-stats">
+                        <span><ion-icon name="location-outline"></ion-icon> 300m</span>
+                        <span class="price">₹20</span>
+                    </div>
+                    <div class="confidence-indicators">
+                        <span class="badge neutral"><ion-icon name="checkmark-circle-outline"></ion-icon> Delivered 8 times</span>
+                        <span class="badge neutral"><ion-icon name="time-outline"></ion-icon> 80% Fast Reply</span>
+                    </div>
+                    <button class="btn primary" style="margin-top: 12px;" onclick="nav('live-track')">Select Priya</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Live Tracking / Status -->
+        <section id="live-track" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Live Tracking</h2>
+                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            </header>
+            <div class="map-placeholder">
+                <ion-icon name="map"></ion-icon>
+                <p>Map View</p>
+            </div>
+            <div class="status-panel">
+                <div class="timer urgent-text">04:59</div>
+                <h3>Supplier is on the way</h3>
+                <div class="stepper">
+                    <div class="step active">Accepted</div>
+                    <div class="step active">On Way</div>
+                    <div class="step">Reached</div>
+                </div>
+                <div class="sup-info mt-top">
+                    <div class="avatar sm">R</div>
+                    <div style="flex: 1;">
+                        <h4>Rahul S.</h4>
+                        <span>Bringing: Calculator</span>
+                    </div>
+                    <button class="icon-btn"><ion-icon name="call"></ion-icon></button>
+                </div>
+                <button class="btn primary lg mt-bot" onclick="nav('pickup-confirm')">Supplier Reached</button>
+                <button class="btn outline lg w-full mt-top" onclick="cancelRequest()">Cancel Request</button>
+            </div>
+        </section>
+
+        <!-- 8. Pickup Confirmation -->
+        <section id="pickup-confirm" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('live-track')"></ion-icon>
+                <h2>Confirm Pickup</h2>
+                <div></div>
+            </header>
+            <div class="qr-container">
+                <p>Show this code to the supplier</p>
+                <div class="qr-box">
+                    <ion-icon name="qr-code-outline"></ion-icon>
+                </div>
+                <div class="otp-display">OTP: 5824</div>
+            </div>
+            <div class="bottom-action">
+                <button class="btn primary lg w-full" onclick="nav('rating')">Item Received</button>
+            </div>
+        </section>
+
+        <!-- 9. Rating Screen -->
+        <section id="rating" class="screen">
+            <div class="content-scroll center">
+                <div class="avatar lg center-item">R</div>
+                <h2 class="mt-top">Rate Rahul S.</h2>
+                <p class="subtext">How was your experience?</p>
+                <div class="star-rating">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                </div>
+                <textarea rows="4" placeholder="Leave a comment (optional)..."></textarea>
+                <button class="btn primary lg w-full" onclick="nav('home')">Submit Review</button>
+            </div>
+        </section>
+
+        <!-- 10. Profile Screen -->
+        <section id="profile" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Profile</h2>
+                <div><ion-icon name="settings-outline"></ion-icon></div>
+            </header>
+            <div class="prof-header">
+                <div class="avatar xl">G</div>
+                <h2>Gowtham K.</h2>
+                <p>Computer Science • 3rd Year</p>
+                <div class="badge green">4.9 ⭐ Rating</div>
+            </div>
+            <div class="prof-stats">
+                <div class="stat-box">
+                    <h3>24</h3>
+                    <p>Rentals</p>
+                </div>
+                <div class="stat-box highlight">
+                    <h3>₹450</h3>
+                    <p>Wallet</p>
+                </div>
+                <div class="stat-box">
+                    <h3>12</h3>
+                    <p>Items</p>
+                </div>
+            </div>
+            <div class="menu-list">
+                <div class="menu-item"><ion-icon name="list-circle-outline"></ion-icon> My Items <ion-icon name="chevron-forward-outline"></ion-icon></div>
+                <div class="menu-item" onclick="nav('history')"><ion-icon name="swap-horizontal-outline"></ion-icon> Request History <ion-icon name="chevron-forward-outline"></ion-icon></div>
+                <div class="menu-item"><ion-icon name="wallet-outline"></ion-icon> Transactions <ion-icon name="chevron-forward-outline"></ion-icon></div>
+                <div class="menu-item red-txt" onclick="nav('login')"><ion-icon name="log-out-outline"></ion-icon> Logout </div>
+            </div>
+        </section>
+
+        <!-- 11. Add Item -->
+        <section id="add-item" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Add New Item</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll">
+                <div class="img-upload">
+                    <ion-icon name="camera-outline"></ion-icon>
+                    <span>Tap to add photos</span>
+                </div>
+                <form class="form-layout">
+                    <div class="field">
+                        <label>Item Name</label>
+                        <input type="text" placeholder="e.g. Scientific Calculator">
+                    </div>
+                    <div class="field">
+                        <label>Description</label>
+                        <textarea rows="3" placeholder="Condition, special notes..."></textarea>
+                    </div>
+                    <div class="field-row">
+                        <div class="field w-half">
+                            <label>Rate (₹)</label>
+                            <input type="number" placeholder="20">
+                        </div>
+                        <div class="field w-half">
+                            <label>Per</label>
+                            <select><option>Hour</option><option>Day</option></select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Category</label>
+                        <select><option>Stationery</option><option>Electronics</option><option>Books</option></select>
+                    </div>
+                    <button type="button" class="btn primary lg w-full" onclick="alert('Item Added!'); nav('home');">Publish Item</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Searching Screen (Intermediate) -->
+        <section id="searching" class="screen">
+            <div class="center center-content full-height">
+                <div class="radar-container">
+                    <div class="radar-ring"></div>
+                    <ion-icon name="search-outline"></ion-icon>
+                </div>
+                <h2 class="mt-top">Searching nearby...</h2>
+                <p class="subtext" style="margin-top: 8px;">Contacting available people for your request.</p>
+            </div>
+        </section>
+
+        <!-- No Response (Failure) -->
+        <section id="no-response" class="screen">
+            <div class="center center-content full-height">
+                <ion-icon name="sad-outline" style="font-size: 64px; margin-bottom: 20px; color: var(--text-muted);"></ion-icon>
+                <h3>No one available right now</h3>
+                <p class="subtext" style="max-width: 300px; margin: 10px auto;">We couldn't find anyone nearby who has accepted your request. What would you like to do?</p>
+                <div style="margin-top: 30px; width: 100%; max-width: 400px; padding: 0 20px;">
+                    <button type="button" class="btn urgent-btn lg w-full" onclick="triggerSearch()">Retry Search</button>
+                    <button type="button" class="btn outline lg w-full mt-top" onclick="alert('Price updated!'); triggerSearch()">Increase Price by ₹10</button>
+                    <button type="button" class="btn secondary lg w-full mt-top" onclick="nav('home')">Cancel Request</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Notifications Screen -->
+        <section id="notifications" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('home')"></ion-icon>
+                <h2>Notifications</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll">
+                <div class="req-card" style="padding: 16px;">
+                    <h4 style="margin-bottom: 4px; font-size: 16px;">New Item Match!</h4>
+                    <p style="color: var(--text-muted); font-size: 14px;">Someone listed a 'Mini Drafter' near you.</p>
+                    <span style="font-size: 11px; color: var(--primary); font-weight: bold; margin-top: 8px; display: block;">2 mins ago</span>
+                </div>
+                <div class="req-card" style="padding: 16px; opacity: 0.7;">
+                    <h4 style="margin-bottom: 4px; font-size: 16px;">Rental Completed</h4>
+                    <p style="color: var(--text-muted); font-size: 14px;">Rahul S. confirmed the return of your Arduino Uno.</p>
+                    <span style="font-size: 11px; color: var(--text-muted); margin-top: 8px; display: block;">Yesterday</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Request History Screen -->
+        <section id="history" class="screen with-nav">
+            <header class="app-header back-header">
+                <ion-icon name="arrow-back-outline" onclick="nav('profile')"></ion-icon>
+                <h2>Request History</h2>
+                <div></div>
+            </header>
+            <div class="content-scroll">
+                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                    <div class="choice active">All</div>
+                    <div class="choice">Completed</div>
+                    <div class="choice">Cancelled</div>
+                </div>
+                
+                <div class="item-card" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+                    <div style="width: 100%; display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-main); font-weight: 600;">Calculator</span>
+                        <span class="badge green">Completed</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-muted);">Supplier: Rahul S. • ₹25</p>
+                </div>
+
+                <div class="item-card" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+                    <div style="width: 100%; display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-main); font-weight: 600;">Lab Coat (M)</span>
+                        <span class="badge red">Cancelled</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-muted);">No response found • ₹10</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Toast UI -->
+    <div id="toast" class="toast">
+        <ion-icon name="information-circle"></ion-icon>
+        <span id="toast-message">Notification</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
